@@ -1,0 +1,12 @@
+venv/
+.env
+uploads_tmp/
+__pycache__/
+*.pyc
+*.pyo
+laudos/
+desktop/config_perito.json
+web/users.json
+.vscode/
+.DS_Store
+*.log

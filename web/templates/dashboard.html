@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="page-header">
+    <h2>⚡ Nova Análise Forense</h2>
+    <p>Preencha os dados abaixo e selecione o arquivo de evidência</p>
+</div>
+
+<form method="POST" action="/calcular" enctype="multipart/form-data" class="card">
+
+    <section class="form-section">
+        <h3>👤 Dados do Perito</h3>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Nome do Perito</label>
+                <input type="text" name="nome_perito" placeholder="Nome completo" required>
+            </div>
+            <div class="form-group">
+                <label>Registro / Matrícula</label>
+                <input type="text" name="registro" placeholder="Ex: 199075-6B" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Instituição</label>
+            <input type="text" name="instituicao" placeholder="Nome da instituição" required>
+        </div>
+    </section>
+
+    <section class="form-section">
+        <h3>📁 Caso e Evidência</h3>
+        <div class="form-group">
+            <label>Número do Caso</label>
+            <input type="text" name="numero_caso" placeholder="Ex: 236036-2019" required>
+        </div>
+        <div class="form-group">
+            <label>Arquivo de Evidência</label>
+            <div class="file-upload">
+                <input type="file" name="arquivo" id="arquivo" required>
+                <label for="arquivo" class="file-label">
+                    📂 Clique para selecionar o arquivo
+                </label>
+                <span class="file-name" id="file-name">Nenhum arquivo selecionado</span>
+            </div>
+        </div>
+    </section>
+
+    <button type="submit" class="btn-primary btn-full btn-large">
+        ⚡ CALCULAR HASH E GERAR LAUDO
+    </button>
+
+</form>
+
+<script>
+    document.getElementById('arquivo').addEventListener('change', function () {
+        const nome = this.files[0] ? this.files[0].name : 'Nenhum arquivo selecionado';
+        document.getElementById('file-name').textContent = nome;
+    });
+</script>
+
+{% endblock %}

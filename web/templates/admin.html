@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="page-header">
+    <h2>⚙️ Painel Administrativo</h2>
+    <p>Gestão de usuários e casos periciais</p>
+</div>
+
+<!-- Cards de resumo -->
+<div class="admin-cards">
+    <div class="admin-card">
+        <span class="admin-card-num">{{ total_usuarios }}</span>
+        <span class="admin-card-label">Usuários</span>
+    </div>
+    <div class="admin-card">
+        <span class="admin-card-num">{{ total_casos }}</span>
+        <span class="admin-card-label">Casos Registrados</span>
+    </div>
+</div>
+
+<!-- Novo usuário -->
+<div class="card" style="margin-bottom: 24px;">
+    <h3 style="margin-bottom:16px; color: var(--texto2);">➕ Novo Usuário</h3>
+    <form method="POST" action="/admin/usuario/novo">
+        <div class="form-row">
+            <div class="form-group">
+                <label>Nome completo</label>
+                <input type="text" name="nome" placeholder="Nome do perito" required>
+            </div>
+            <div class="form-group">
+                <label>Usuário (login)</label>
+                <input type="text" name="username" placeholder="username" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Senha</label>
+                <input type="password" name="password" placeholder="Senha inicial" required>
+            </div>
+            <div class="form-group">
+                <label>Perfil</label>
+                <select name="perfil" style="width:100%; padding:10px; background:var(--campo);
+                border:1px solid var(--borda); color:var(--texto); border-radius:6px;">
+                    <option value="perito">Perito</option>
+                    <option value="admin">Admin</option>
+                </select>
+            </div>
+        </div>
+        <button type="submit" class="btn-primary">➕ Criar Usuário</button>
+    </form>
+</div>
+
+<!-- Lista de usuários -->
+<div class="card" style="margin-bottom: 24px;">
+    <h3 style="margin-bottom:16px; color: var(--texto2);">👥 Usuários Cadastrados</h3>
+    <table class="info-table" style="width:100%">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Usuário</th>
+                <th>Perfil</th>
+                <th>Cadastro</th>
+                <th>Status</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for u in usuarios %}
+            <tr>
+                <td>{{ u.nome }}</td>
+                <td>{{ u.username }}</td>
+                <td><span class="badge" style="background:var(--destaque)">{{ u.perfil }}</span></td>
+                <td>{{ u.criado_em.strftime('%d/%m/%Y') }}</td>
+                <td>
+                    {% if u.ativo %}
+                    <span style="color: var(--verde)">● Ativo</span>
+                    {% else %}
+                    <span style="color: var(--acento)">● Inativo</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="/admin/usuario/{{ u.id }}/toggle"
+                        style="color: var(--texto2); font-size:0.85rem; margin-right:10px;">
+                        {% if u.ativo %}Desativar{% else %}Ativar{% endif %}
+                    </a>
+                    {% if u.username != 'admin' %}
+                    <a href="/admin/usuario/{{ u.id }}/excluir" style="color: var(--acento); font-size:0.85rem;"
+                        onclick="return confirm('Confirma exclusão de {{ u.nome }}?')">
+                        Excluir
+                    </a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Lista de casos -->
+<div class="card">
+    <h3 style="margin-bottom:16px; color: var(--texto2);">📋 Todos os Casos</h3>
+    <table class="info-table" style="width:100%">
+        <thead>
+            <tr>
+                <th>Nº Caso</th>
+                <th>Arquivo</th>
+                <th>Perito</th>
+                <th>Data</th>
+                <th>MD5</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for c in casos %}
+            <tr>
+                <td><strong>{{ c.numero_caso }}</strong></td>
+                <td>{{ c.arquivo_nome }}</td>
+                <td>{{ c.perito.nome }}</td>
+                <td>{{ c.criado_em.strftime('%d/%m/%Y %H:%M') }}</td>
+                <td class="hash-value" style="font-size:0.75rem">{{ c.md5 }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

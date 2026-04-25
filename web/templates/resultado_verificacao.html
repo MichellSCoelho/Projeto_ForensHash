@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="page-header">
+    <h2>
+        {% if integro %}
+        ✅ Arquivo Íntegro
+        {% else %}
+        ❌ Arquivo Adulterado
+        {% endif %}
+    </h2>
+    <p>Caso: <strong>{{ caso.numero_caso }}</strong> — verificado em {{ verificacao.verificado_em.strftime('%d/%m/%Y
+        %H:%M:%S') }}</p>
+</div>
+
+<!-- Banner de resultado -->
+<div class="banner-resultado {% if integro %}banner-ok{% else %}banner-erro{% endif %}">
+    {% if integro %}
+    ✅ ÍNTEGRO — Os hashes correspondem. O arquivo não foi modificado desde a perícia original.
+    {% else %}
+    ❌ ADULTERADO — Os hashes divergem. O arquivo foi modificado após a perícia original!
+    {% endif %}
+</div>
+
+<div class="card">
+
+    <!-- Identificação do caso -->
+    <section class="form-section">
+        <h3>📁 Identificação do Caso</h3>
+        <table class="info-table">
+            <tr>
+                <th>Nº do Caso</th>
+                <td>{{ caso.numero_caso }}</td>
+            </tr>
+            <tr>
+                <th>Arquivo Original</th>
+                <td>{{ caso.arquivo_nome }}</td>
+            </tr>
+            <tr>
+                <th>Perito Original</th>
+                <td>{{ caso.perito.nome }}</td>
+            </tr>
+            <tr>
+                <th>Data da Perícia</th>
+                <td>{{ caso.criado_em.strftime('%d/%m/%Y %H:%M:%S') }}</td>
+            </tr>
+            <tr>
+                <th>Data da Verificação</th>
+                <td>{{ verificacao.verificado_em.strftime('%d/%m/%Y %H:%M:%S') }}</td>
+            </tr>
+        </table>
+    </section>
+
+    <!-- Comparação de hashes -->
+    <section class="form-section">
+        <h3>🔑 Comparação de Hashes</h3>
+        <table class="info-table" style="width:100%">
+            <thead>
+                <tr>
+                    <th style="width:10%">Algoritmo</th>
+                    <th style="width:40%">Hash Original (banco)</th>
+                    <th style="width:40%">Hash Atual (arquivo)</th>
+                    <th style="width:10%">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>MD5</strong></td>
+                    <td class="hash-value">{{ caso.md5 }}</td>
+                    <td class="hash-value">{{ resultado.md5 }}</td>
+                    <td>{% if md5_ok %}<span style="color:var(--verde)">✅</span>{% else %}<span
+                            style="color:var(--acento)">❌</span>{% endif %}</td>
+                </tr>
+                <tr>
+                    <td><strong>SHA-1</strong></td>
+                    <td class="hash-value">{{ caso.sha1 }}</td>
+                    <td class="hash-value">{{ resultado.sha1 }}</td>
+                    <td>{% if sha1_ok %}<span style="color:var(--verde)">✅</span>{% else %}<span
+                            style="color:var(--acento)">❌</span>{% endif %}</td>
+                </tr>
+                <tr>
+                    <td><strong>SHA-256</strong></td>
+                    <td class="hash-value">{{ caso.sha256 }}</td>
+                    <td class="hash-value">{{ resultado.sha256 }}</td>
+                    <td>{% if sha256_ok %}<span style="color:var(--verde)">✅</span>{% else %}<span
+                            style="color:var(--acento)">❌</span>{% endif %}</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Ações -->
+    <div style="display:flex; gap:12px; margin-top:8px;">
+        <a href="{{ url_for('verificar') }}" class="btn-secondary">← Nova Verificação</a>
+        <a href="{{ url_for('dashboard') }}" class="btn-secondary">🏠 Dashboard</a>
+    </div>
+
+</div>
+
+{% endblock %}

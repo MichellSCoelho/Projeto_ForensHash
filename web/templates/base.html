@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ForensHash — Perícia Forense Computacional</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    {% if session.usuario %}
+    <nav class="navbar">
+        <div class="nav-brand">🔍 ForensHash</div>
+        <div class="nav-links">
+            <span class="nav-user">👤 {{ session.nome }} <span class="badge">{{ session.perfil }}</span></span>
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('historico') }}">Histórico</a>
+            <a href="{{ url_for('verificar') }}">🔎 Verificar</a>
+            {% if session.perfil == 'admin' %}
+            <a href="{{ url_for('admin_panel') }}">⚙️ Admin</a>
+            {% endif %}
+            <a href="{{ url_for('logout') }}" class="btn-logout">Sair</a>
+        </div>
+    </nav>
+    {% endif %}
+
+    <main class="container">
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+
+    </main>
+
+    <footer class="footer">
+        <p>ForensHash © 2026 — Sistema de Perícia Forense Computacional</p>
+    </footer>
+
+</body>
+
+</html>

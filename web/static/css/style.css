@@ -1,0 +1,413 @@
+/* ─── Reset e base ─────────────────────────────────────────────────────────── */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --fundo: #1A1A2E;
+    --painel: #16213E;
+    --destaque: #0F3460;
+    --acento: #E94560;
+    --texto: #EAEAEA;
+    --texto2: #A0A0B0;
+    --verde: #4CAF50;
+    --campo: #0D1B2A;
+    --borda: #1e2d45;
+}
+
+body {
+    background: var(--fundo);
+    color: var(--texto);
+    font-family: 'Courier New', monospace;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ─── Navbar ───────────────────────────────────────────────────────────────── */
+.navbar {
+    background: var(--acento);
+    padding: 14px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-brand {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: white;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.nav-user {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.9rem;
+}
+
+.badge {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 0.75rem;
+    margin-left: 6px;
+}
+
+.btn-logout {
+    background: rgba(0, 0, 0, 0.25);
+    padding: 6px 14px;
+    border-radius: 4px;
+}
+
+/* ─── Container ────────────────────────────────────────────────────────────── */
+.container {
+    max-width: 860px;
+    margin: 36px auto;
+    padding: 0 20px;
+    flex: 1;
+}
+
+/* ─── Alertas ──────────────────────────────────────────────────────────────── */
+.alert {
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+}
+
+.alert-success {
+    background: #1B5E20;
+    color: #A5D6A7;
+}
+
+.alert-danger {
+    background: #B71C1C;
+    color: #FFCDD2;
+}
+
+.alert-warning {
+    background: #E65100;
+    color: #FFE0B2;
+}
+
+.alert-info {
+    background: #0D47A1;
+    color: #BBDEFB;
+}
+
+/* ─── Login ────────────────────────────────────────────────────────────────── */
+.login-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+}
+
+.login-box {
+    background: var(--painel);
+    border: 1px solid var(--borda);
+    border-radius: 10px;
+    padding: 40px;
+    width: 100%;
+    max-width: 420px;
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.login-header h1 {
+    font-size: 1.8rem;
+    color: var(--acento);
+    margin-bottom: 6px;
+}
+
+.login-header p {
+    color: var(--texto2);
+    font-size: 0.9rem;
+}
+
+/* ─── Card ─────────────────────────────────────────────────────────────────── */
+.card {
+    background: var(--painel);
+    border: 1px solid var(--borda);
+    border-radius: 10px;
+    padding: 28px;
+}
+
+/* ─── Formulários ──────────────────────────────────────────────────────────── */
+.form-section {
+    margin-bottom: 28px;
+}
+
+.form-section h3 {
+    color: var(--texto2);
+    font-size: 0.95rem;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--borda);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--texto2);
+    margin-bottom: 6px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px 14px;
+    background: var(--campo);
+    border: 1px solid var(--borda);
+    border-radius: 6px;
+    color: var(--texto);
+    font-family: 'Courier New', monospace;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border 0.2s;
+}
+
+.form-group input:focus {
+    border-color: var(--acento);
+}
+
+/* ─── Upload ───────────────────────────────────────────────────────────────── */
+.file-upload input[type="file"] {
+    display: none;
+}
+
+.file-label {
+    display: inline-block;
+    padding: 10px 20px;
+    background: var(--destaque);
+    color: var(--texto);
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    transition: background 0.2s;
+}
+
+.file-label:hover {
+    background: #1a4a80;
+}
+
+.file-name {
+    display: block;
+    color: var(--texto2);
+    font-size: 0.85rem;
+    margin-top: 6px;
+}
+
+/* ─── Botões ───────────────────────────────────────────────────────────────── */
+.btn-primary {
+    background: var(--acento);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.95rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-primary:hover {
+    background: #c73652;
+}
+
+.btn-full {
+    width: 100%;
+    text-align: center;
+}
+
+.btn-large {
+    padding: 14px;
+    font-size: 1rem;
+    margin-top: 8px;
+}
+
+.btn-secondary {
+    background: var(--destaque);
+    color: var(--texto);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 0.9rem;
+    display: inline-block;
+}
+
+/* ─── Tabelas ──────────────────────────────────────────────────────────────── */
+.info-table,
+.hash-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+
+.info-table th,
+.hash-table th {
+    background: var(--destaque);
+    color: var(--texto);
+    padding: 10px 14px;
+    text-align: left;
+    width: 30%;
+    font-weight: bold;
+}
+
+.info-table td,
+.hash-table td {
+    background: var(--campo);
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--borda);
+    color: var(--texto);
+}
+
+.hash-value {
+    color: var(--verde) !important;
+    font-family: 'Courier New', monospace;
+    font-size: 0.82rem;
+    word-break: break-all;
+}
+
+/* ─── Download ─────────────────────────────────────────────────────────────── */
+.download-buttons {
+    display: flex;
+    gap: 16px;
+    margin: 24px 0 16px;
+}
+
+.btn-download {
+    flex: 1;
+    padding: 14px;
+    border-radius: 6px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    font-family: 'Courier New', monospace;
+    font-size: 0.95rem;
+    transition: opacity 0.2s;
+}
+
+.btn-download:hover {
+    opacity: 0.85;
+}
+
+.btn-word {
+    background: #1B5E20;
+    color: white;
+}
+
+.btn-pdf {
+    background: #B71C1C;
+    color: white;
+}
+
+/* ─── Page header ──────────────────────────────────────────────────────────── */
+.page-header {
+    margin-bottom: 24px;
+}
+
+.page-header h2 {
+    font-size: 1.4rem;
+    color: var(--texto);
+    margin-bottom: 6px;
+}
+
+.page-header p {
+    color: var(--texto2);
+    font-size: 0.9rem;
+}
+
+/* ─── Footer ───────────────────────────────────────────────────────────────── */
+.footer {
+    text-align: center;
+    padding: 16px;
+    color: var(--texto2);
+    font-size: 0.8rem;
+    border-top: 1px solid var(--borda);
+    margin-top: auto;
+}
+
+/* ─── Admin cards ──────────────────────────────────────────────────────────── */
+.admin-cards {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.admin-card {
+    flex: 1;
+    background: var(--painel);
+    border: 1px solid var(--borda);
+    border-radius: 10px;
+    padding: 24px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.admin-card-num {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--acento);
+}
+
+.admin-card-label {
+    color: var(--texto2);
+    font-size: 0.9rem;
+}
+
+/* ─── Verificação de integridade ───────────────────────────────────────────── */
+.banner-resultado {
+    padding: 16px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1rem;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.banner-ok {
+    background: #1B5E20;
+    color: #A5D6A7;
+    border: 1px solid #2E7D32;
+}
+
+.banner-erro {
+    background: #B71C1C;
+    color: #FFCDD2;
+    border: 1px solid #C62828;
+}

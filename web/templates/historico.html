@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="page-header">
+    <h2>📋 Histórico de Casos</h2>
+    <p>Total de {{ casos|length }} caso(s) registrado(s)</p>
+</div>
+
+<div class="card">
+    {% if casos %}
+    <table class="info-table" style="width:100%">
+        <thead>
+            <tr>
+                <th>Nº do Caso</th>
+                <th>Arquivo</th>
+                <th>Perito</th>
+                <th>Tamanho</th>
+                <th>Data</th>
+                <th>SHA-256</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for caso in casos %}
+            <tr>
+                <td><strong>{{ caso.numero_caso }}</strong></td>
+                <td>{{ caso.arquivo_nome }}</td>
+                <td>{{ caso.perito.nome }}</td>
+                <td>{{ caso.tamanho }}</td>
+                <td>{{ caso.criado_em.strftime('%d/%m/%Y %H:%M') }}</td>
+                <td class="hash-value" style="font-size:0.75rem">{{ caso.sha256[:32] }}...</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p style="color: var(--texto2); text-align:center; padding: 40px;">
+        Nenhum caso registrado ainda.
+    </p>
+    {% endif %}
+</div>
+
+{% endblock %}

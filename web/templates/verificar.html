@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="page-header">
+    <h2>🔎 Verificação de Integridade</h2>
+    <p>Selecione um caso e envie o arquivo para verificar se foi adulterado</p>
+</div>
+
+{% if casos %}
+{% for caso in casos %}
+<div class="card" style="margin-bottom: 16px;">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:12px;">
+
+        <div>
+            <p style="color:var(--acento); font-weight:bold; margin-bottom:4px;">
+                📁 {{ caso.numero_caso }}
+            </p>
+            <p style="color:var(--texto); margin-bottom:2px;">{{ caso.arquivo_nome }}</p>
+            <p style="color:var(--texto2); font-size:0.85rem;">
+                Perito: {{ caso.perito.nome }} — {{ caso.criado_em.strftime('%d/%m/%Y %H:%M') }}
+            </p>
+            <p style="color:var(--verde); font-size:0.8rem; font-family:monospace; margin-top:6px;">
+                SHA-256 original: {{ caso.sha256[:48] }}...
+            </p>
+        </div>
+
+        <form method="POST" action="/verificar/{{ caso.id }}" enctype="multipart/form-data"
+            style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+            <div class="file-upload">
+                <input type="file" name="arquivo" id="arquivo-{{ caso.id }}"
+                    onchange="document.getElementById('fname-{{ caso.id }}').textContent = this.files[0].name" required>
+                <label for="arquivo-{{ caso.id }}" class="file-label" style="padding:8px 14px; font-size:0.85rem;">
+                    📂 Selecionar arquivo
+                </label>
+                <span id="fname-{{ caso.id }}"
+                    style="color:var(--texto2); font-size:0.8rem; display:block; margin-top:4px;">
+                    Nenhum arquivo
+                </span>
+            </div>
+            <button type="submit" class="btn-primary" style="padding:8px 16px; white-space:nowrap;">
+                ⚡ Verificar
+            </button>
+        </form>
+
+    </div>
+</div>
+{% endfor %}
+
+{% else %}
+<div class="card">
+    <p style="color:var(--texto2); text-align:center; padding:40px;">
+        Nenhum caso registrado para verificação.
+        <br><br>
+        <a href="{{ url_for('dashboard') }}" class="btn-primary">Fazer nova análise</a>
+    </p>
+</div>
+{% endif %}
+
+{% endblock %}

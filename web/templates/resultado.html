@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="page-header">
+    <h2>✅ Análise Concluída</h2>
+    <p>Caso: <strong>{{ numero_caso }}</strong> — {{ dados_hash.data_analise }}</p>
+</div>
+
+<div class="card">
+    <section class="form-section">
+        <h3>📁 Identificação da Evidência</h3>
+        <table class="info-table">
+            <tr>
+                <th>Arquivo</th>
+                <td>{{ dados_hash.arquivo }}</td>
+            </tr>
+            <tr>
+                <th>Caminho</th>
+                <td>{{ dados_hash.caminho_completo }}</td>
+            </tr>
+            <tr>
+                <th>Tamanho</th>
+                <td>{{ dados_hash.tamanho_legivel }}</td>
+            </tr>
+            <tr>
+                <th>Data da Análise</th>
+                <td>{{ dados_hash.data_analise }}</td>
+            </tr>
+        </table>
+    </section>
+
+    <section class="form-section">
+        <h3>🔑 Valores de Hash</h3>
+        <table class="hash-table">
+            <tr>
+                <th>MD5</th>
+                <td class="hash-value">{{ dados_hash.md5 }}</td>
+            </tr>
+            <tr>
+                <th>SHA-1</th>
+                <td class="hash-value">{{ dados_hash.sha1 }}</td>
+            </tr>
+            <tr>
+                <th>SHA-256</th>
+                <td class="hash-value">{{ dados_hash.sha256 }}</td>
+            </tr>
+        </table>
+    </section>
+
+    <section class="form-section">
+        <h3>👤 Perito Responsável</h3>
+        <table class="info-table">
+            <tr>
+                <th>Nome</th>
+                <td>{{ dados_perito.nome }}</td>
+            </tr>
+            <tr>
+                <th>Registro</th>
+                <td>{{ dados_perito.registro }}</td>
+            </tr>
+            <tr>
+                <th>Instituição</th>
+                <td>{{ dados_perito.instituicao }}</td>
+            </tr>
+        </table>
+    </section>
+
+    <div class="download-buttons">
+        <a href="/download/docx" class="btn-download btn-word">
+            📄 Baixar Laudo Word
+        </a>
+        <a href="/download/pdf" class="btn-download btn-pdf">
+            📕 Baixar Laudo PDF
+        </a>
+    </div>
+
+    <div class="actions">
+        <a href="{{ url_for('dashboard') }}" class="btn-secondary">
+            ← Nova Análise
+        </a>
+    </div>
+
+</div>
+
+{% endblock %}
