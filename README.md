@@ -1,4 +1,3 @@
-cat > README.md << 'ENDOFFILE'
 # 🔍 ForensHash — Sistema de Perícia Forense Computacional
 
 ![Python](https://img.shields.io/badge/Python-3.12-blue)
